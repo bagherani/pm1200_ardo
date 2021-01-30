@@ -28,15 +28,15 @@ class PowerMeter {
       return this->id;
     }
 
-    void ReadAll(long values[]) {
-      int address [] = {3925, 3939, 3953, 3929, 3943, 3957, 3913, 3923, 3937, 3951, 3907};
+    void ReadRegisters(long values[]) {
+      int addresses [] = {3925, 3939, 3953, 3929, 3943, 3957, 3913, 3923, 3937, 3951, 3907};
       for (int i = 0; i < regsCount; i++) {
-        values[i] = mod.holdingRegisterRead(this->id, address[i]);
+        values[i] = mod.holdingRegisterRead(this->id, addresses[i]);
         delay(30);
       }
     }
 
-    void WriteCurrentToFile() {
+    void WriteDataToFile() {
       String filePath = "/pm" + String(this->id) + ".csv";
 
       if (!SD.exists(filePath)) {
